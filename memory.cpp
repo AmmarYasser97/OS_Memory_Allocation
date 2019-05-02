@@ -6,14 +6,12 @@
 
 using namespace std;
 
-
 struct Process
 {
     string name;
     int number_of_segments;
     vector<Block> segments;
 };
-
 
 Memory::Memory(int Size) : Initial_Block("", "", 0, Size, false)
 {
@@ -77,8 +75,8 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
 
     else if ((*i).getStart() == Start)
     {
-        Block p1(PName, SName, Start, Size, true);
-        Block p2("", "", Start + Size + 1, (*i).getSize() - Size, false);
+        Block p1(PName, SName, Start, Size - 1, true);
+        Block p2("", "", Start + Size, (*i).getSize() - Size - 1, false);
         i = memory.erase(i);
         memory.insert(i, p1);
         memory.insert(i, p2);
@@ -86,8 +84,8 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
 
     else if ((*i).getEnd() == (Start + Size))
     {
-        Block p1("", "", Start, (*i).getSize() - Size, false);
-        Block p2(PName, SName, (*i).getEnd() - Size + 1, Size, true);
+        Block p1("", "", (*i).getStart(), (*i).getSize() - Size - 1, false);
+        Block p2(PName, SName, (*i).getEnd() - Size, Size - 1, true);
         i = memory.erase(i);
         memory.insert(i, p1);
         memory.insert(i, p2);
@@ -95,9 +93,9 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
 
     else
     {
-        Block p1("", "", (*i).getStart(), Start - (*i).getStart(), false);
-        Block p2("PName", "SName", Start, Size, true);
-        Block p3("", "", Start + Size + 1, (*i).getEnd(), false);
+        Block p1("", "", (*i).getStart(), Start - (*i).getStart() - 1, false);
+        Block p2("PName", "SName", Start, Size - 1, true);
+        Block p3("", "", Start + Size, (*i).getEnd() - 1, false);
         i = memory.erase(i);
         memory.insert(i, p1);
         memory.insert(i, p2);
