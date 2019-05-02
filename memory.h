@@ -27,6 +27,8 @@ public:
 
     void Compact_Blocks(list<Block>::iterator i);
 
+    void Print_Memory();
+
 };
 
 #endif //UNTITLED_MEMORY_H
