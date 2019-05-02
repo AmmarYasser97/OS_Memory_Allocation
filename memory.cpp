@@ -7,14 +7,12 @@
 using namespace std;
 
 
-//class Process
-//{
-//private:
-//    int number_of_segments;
-//    Block[number_of_segments] segments;
-//
-//public:
-//};
+struct Process
+{
+    string name;
+    int number_of_segments;
+    vector<Block> segments;
+};
 
 
 Memory::Memory(int Size) : Initial_Block("", "", 0, Size, false)
@@ -28,10 +26,9 @@ list<Block>::iterator Memory::Find_Iterator(int start, int end)
     list<Block>::iterator i;
     for (i = memory.begin(); i != memory.end(); i++)
     {
-        if ((*i).getStart() > start)
+        if ((*i).getStart() <= start)
         {
-            i--;
-            if (!((*i).getType()) && (*i).getEnd() > end)
+            if (!((*i).getType()) && (*i).getEnd() >= end)
             {
                 return i;
             }
@@ -70,12 +67,14 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
 
     list<Block>::iterator i;
     i = Find_Iterator(Start, Start + Size);
+
     if ((*i).getStart() == Start && (*i).getSize() == Size)
     {
         (*i).setProcessName(PName);
         (*i).setSegmentName(SName);
         (*i).setType(true);
     }
+
     else if ((*i).getStart() == Start)
     {
         Block p1(PName, SName, Start, Size, true);
@@ -83,12 +82,8 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
         i = memory.erase(i);
         memory.insert(i, p1);
         memory.insert(i, p2);
-
-        if (i != memory.end())
-        {
-            Compact_Blocks(--i);
-        }
     }
+
     else if ((*i).getEnd() == (Start + Size))
     {
         Block p1("", "", Start, (*i).getSize() - Size, false);
@@ -96,14 +91,8 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
         i = memory.erase(i);
         memory.insert(i, p1);
         memory.insert(i, p2);
-        i--;
-        i--;
-        i--;
-        if (i != memory.begin())
-        {
-            Compact_Blocks(i);
-        }
     }
+
     else
     {
         Block p1("", "", (*i).getStart(), Start - (*i).getStart(), false);
@@ -113,23 +102,6 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
         memory.insert(i, p1);
         memory.insert(i, p2);
         memory.insert(i, p3);
-
-        list<Block>::iterator it_p3; //In case compaction happens i will be dangling operator
-
-        it_p3 = --i;
-
-        if (i != memory.end())
-        {
-            Compact_Blocks(--i);
-        }
-
-        i--;
-        i--;
-        i--;
-        if (i != memory.begin())
-        {
-            Compact_Blocks(i);
-        }
     }
 }
 
@@ -146,4 +118,14 @@ void Memory::Compact_Blocks(list<Block>::iterator i)
     i = memory.erase(i);
     i = memory.erase(i);
     memory.insert(i, p1);
+}
+
+void Memory::Print_Memory()
+{
+    for (auto it = memory.begin(); it != memory.end(); ++it)
+    {
+        cout << "size of" << it->getProcessName() << ":" << it->getSegmentName() << " is " << it->getSize()
+             << "\t starting from: " << it->getStart() << " till: " << it->getEnd() << "and its type: " << it->getType()
+             << endl;
+    }
 }
