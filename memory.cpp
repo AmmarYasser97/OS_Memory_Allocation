@@ -141,7 +141,7 @@ void Memory::Remove_Block(list<Block>::iterator i)
 
     /*Compacting Algorithm if the previous and next is empty compact twice if previous or next compact once*/
 
-    i--;
+
     Prev_Start = (*i).getStart();
     if (i == memory.begin())
     {
@@ -152,7 +152,7 @@ void Memory::Remove_Block(list<Block>::iterator i)
         Prev_Type = (*i).getType();
     }
 
-    i++;
+
     i++;
 
     if (i == memory.end())

@@ -5,10 +5,12 @@ CMakeFiles/OS_Memory_Allocation.dir/Block.cpp.obj: ../Block.cpp
 CMakeFiles/OS_Memory_Allocation.dir/Block.cpp.obj: ../Block.h
 
 CMakeFiles/OS_Memory_Allocation.dir/main.cpp.obj: ../Block.h
+CMakeFiles/OS_Memory_Allocation.dir/main.cpp.obj: ../Process.h
 CMakeFiles/OS_Memory_Allocation.dir/main.cpp.obj: ../main.cpp
 CMakeFiles/OS_Memory_Allocation.dir/main.cpp.obj: ../memory.h
 
 CMakeFiles/OS_Memory_Allocation.dir/memory.cpp.obj: ../Block.h
+CMakeFiles/OS_Memory_Allocation.dir/memory.cpp.obj: ../Process.h
 CMakeFiles/OS_Memory_Allocation.dir/memory.cpp.obj: ../memory.cpp
 CMakeFiles/OS_Memory_Allocation.dir/memory.cpp.obj: ../memory.h
 

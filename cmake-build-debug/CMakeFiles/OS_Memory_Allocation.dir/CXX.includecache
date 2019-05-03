@@ -20,11 +20,25 @@ iterator
 string
 -
 
+C:/Users/hp/Documents/GitHub/OS_Memory_Allocation/Process.h
+string
+-
+vector
+-
+Block.h
+C:/Users/hp/Documents/GitHub/OS_Memory_Allocation/Block.h
+
 C:/Users/hp/Documents/GitHub/OS_Memory_Allocation/main.cpp
+memory.h
+C:/Users/hp/Documents/GitHub/OS_Memory_Allocation/memory.h
+
+C:/Users/hp/Documents/GitHub/OS_Memory_Allocation/memory.cpp
 memory.h
 C:/Users/hp/Documents/GitHub/OS_Memory_Allocation/memory.h
 
 C:/Users/hp/Documents/GitHub/OS_Memory_Allocation/memory.h
 Block.h
 C:/Users/hp/Documents/GitHub/OS_Memory_Allocation/Block.h
+Process.h
+C:/Users/hp/Documents/GitHub/OS_Memory_Allocation/Process.h
 

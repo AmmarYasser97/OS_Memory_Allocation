@@ -12,8 +12,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c306807c-a6e3-42ed-a43a-b3db584f023d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/memory.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/memory.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/OS_Memory_Allocation.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/OS_Memory_Allocation.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/OS_Memory_Allocation.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/memory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/memory.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/memory.h" beforeDir="false" afterPath="$PROJECT_DIR$/memory.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,26 +51,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/memory.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
+            <state relative-caret-position="425">
               <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/memory.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+            <state relative-caret-position="149">
+              <caret line="172" column="8" lean-forward="true" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
-              <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+            <state relative-caret-position="387">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -92,8 +98,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/memory.h" />
-        <option value="$PROJECT_DIR$/memory.cpp" />
         <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/memory.cpp" />
       </list>
     </option>
   </component>
@@ -119,7 +125,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -131,9 +136,11 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/CMakeLists.txt" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -171,20 +178,19 @@
       <workItem from="1556885468484" duration="144000" />
       <workItem from="1556885658801" duration="12000" />
       <workItem from="1556886186544" duration="3248000" />
+      <workItem from="1556910530483" duration="179000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4056000" />
+    <option name="totallyTimeSpent" value="4235000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22300771" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22557841" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.3293011" />
-      <window_info anchor="bottom" id="CMake" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3293011" />
@@ -196,6 +202,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.3293011" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.3293011" />
+      <window_info anchor="bottom" id="CMake" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -206,24 +214,17 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="28" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/memory.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
+        <state relative-caret-position="425">
           <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memory.cpp">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="172" lean-forward="true" selection-start-line="172" selection-end-line="172" />
+        <state relative-caret-position="17">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -232,8 +233,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
+        <state relative-caret-position="387">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memory.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="172" column="8" lean-forward="true" selection-start-line="172" selection-start-column="8" selection-end-line="172" selection-end-column="8" />
         </state>
       </provider>
     </entry>
