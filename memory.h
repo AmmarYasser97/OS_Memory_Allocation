@@ -3,22 +3,22 @@
 // Tested by Ammar Yasser on 5/3/19.
 //
 
-
 #ifndef UNTITLED_MEMORY_H
 #define UNTITLED_MEMORY_H
 
 #include "Block.h"
+#include "Process.h"
 
 using namespace std;
 
 class Memory
 {
-private:
+  private:
     list<Block> memory;
     Block Initial_Block;
     int size;
 
-public:
+  public:
     explicit Memory(int Size);
 
     list<Block>::iterator Find_Iterator(int start, int end);
@@ -35,6 +35,9 @@ public:
 
     void Print_Memory();
 
+    void Deallocate_Process(string process_name);
+
+    void best_fit(Process process);
 };
 
 #endif //UNTITLED_MEMORY_H

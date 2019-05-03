@@ -7,13 +7,6 @@
 
 using namespace std;
 
-struct Process
-{
-    string name;
-    int number_of_segments;
-    vector<Block> segments;
-};
-
 Memory::Memory(int Size) : Initial_Block("", "", 0, Size, false)
 {
     size = Size;
@@ -126,11 +119,11 @@ void Memory::Compact_Blocks(list<Block>::iterator i)
     start = (*i).getStart();
     size_1 = (*i).getSize();
     ++i;
-    size_2 =  (*i).getSize();
+    size_2 = (*i).getSize();
 
     --i;
 
-    Block p1("", "", start, size_1+size_2, false);
+    Block p1("", "", start, size_1 + size_2, false);
     i = memory.erase(i);
     i = memory.erase(i);
     memory.insert(i, p1);
@@ -138,8 +131,8 @@ void Memory::Compact_Blocks(list<Block>::iterator i)
 
 void Memory::Remove_Block(list<Block>::iterator i)
 {
-    bool Prev_Type,Next_Type;
-    int Prev_Start,Current_Start;
+    bool Prev_Type, Next_Type;
+    int Prev_Start, Current_Start;
     (*i).setProcessName("");
     (*i).setSegmentName("");
     (*i).setType(false);
@@ -150,7 +143,7 @@ void Memory::Remove_Block(list<Block>::iterator i)
 
     i--;
     Prev_Start = (*i).getStart();
-    if(i == memory.begin())
+    if (i == memory.begin())
     {
         Prev_Type = true;
     }
@@ -162,16 +155,16 @@ void Memory::Remove_Block(list<Block>::iterator i)
     i++;
     i++;
 
-    if(i == memory.end())
+    if (i == memory.end())
     {
         Next_Type = true;
     }
-    else {
+    else
+    {
         Next_Type = (*i).getType();
     }
 
-
-    if(!(Prev_Type) && !(Next_Type))
+    if (!(Prev_Type) && !(Next_Type))
     {
 
         i = Find_Iterator_By_Start(Prev_Start);
@@ -179,19 +172,16 @@ void Memory::Remove_Block(list<Block>::iterator i)
         i = Find_Iterator_By_Start(Prev_Start);
         Compact_Blocks(i);
     }
-    else if(!(Prev_Type))
+    else if (!(Prev_Type))
     {
         i = Find_Iterator_By_Start(Prev_Start);
         Compact_Blocks(i);
     }
-    else if(!(Next_Type))
+    else if (!(Next_Type))
     {
         i = Find_Iterator_By_Start(Current_Start);
         Compact_Blocks(i);
     }
-
-
-
 }
 
 void Memory::Print_Memory()
@@ -201,5 +191,16 @@ void Memory::Print_Memory()
         cout << "size of " << it->getProcessName() << ":" << it->getSegmentName() << " is " << it->getSize()
              << "\t starting from: " << it->getStart() << " till: " << it->getEnd() << " and its type: " << it->getType()
              << endl;
+    }
+}
+
+void Memory::Deallocate_Process(string process_name)
+{
+    for (list<Block>::iterator i = memory.begin(); i != memory.end(); i++)
+    {
+        if (i->getProcessName() == process_name)
+        {
+            Remove_Block(i);
+        }
     }
 }
