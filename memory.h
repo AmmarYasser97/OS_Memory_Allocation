@@ -38,6 +38,10 @@ class Memory
     void Deallocate_Process(string process_name);
 
     void best_fit(Process process);
+
+    void first_fit(Process process);
+
+    void worst_fit(Process process);
 };
 
 #endif //UNTITLED_MEMORY_H
