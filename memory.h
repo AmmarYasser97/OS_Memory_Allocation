@@ -23,9 +23,13 @@ public:
 
     list<Block>::iterator Find_Iterator(int start, int end);
 
+    list<Block>::iterator Find_Iterator_By_Start(int start);
+
     bool Is_Empty_Boolean(int start, int end);
 
     void Add_Block(string PName, string SName, int Start, int Size);
+
+    void Remove_Block(list<Block>::iterator i);
 
     void Compact_Blocks(list<Block>::iterator i);
 

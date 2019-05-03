@@ -60,6 +60,19 @@ bool Memory::Is_Empty_Boolean(int start, int end)
     return false;
 }
 
+list<Block>::iterator Memory::Find_Iterator_By_Start(int start)
+{
+    list<Block>::iterator i;
+    for (i = memory.begin(); i != memory.end(); i++)
+    {
+        if ((*i).getStart() == start)
+        {
+            return i;
+        }
+    }
+    return memory.end();
+}
+
 void Memory::Add_Block(string PName, string SName, int Start, int Size)
 {
 
@@ -107,12 +120,17 @@ void Memory::Compact_Blocks(list<Block>::iterator i)
 {
     //i represents the iterator of the first block
     int start;
-    int size;
+    int size_1; //size of the first block
+    int size_2; //size of the second block
 
     start = (*i).getStart();
-    size = (*i).getSize() + (*(++i)).getSize();
+    size_1 = (*i).getSize();
+    ++i;
+    size_2 =  (*i).getSize();
 
-    Block p1("", "", start, size, false);
+    --i;
+
+    Block p1("", "", start, size_1+size_2, false);
     i = memory.erase(i);
     i = memory.erase(i);
     memory.insert(i, p1);
@@ -120,11 +138,60 @@ void Memory::Compact_Blocks(list<Block>::iterator i)
 
 void Memory::Remove_Block(list<Block>::iterator i)
 {
+    bool Prev_Type,Next_Type;
+    int Prev_Start,Current_Start;
     (*i).setProcessName("");
     (*i).setSegmentName("");
     (*i).setType(false);
 
+    Current_Start = (*i).getStart();
+
     /*Compacting Algorithm if the previous and next is empty compact twice if previous or next compact once*/
+
+    i--;
+    Prev_Start = (*i).getStart();
+    if(i == memory.begin())
+    {
+        Prev_Type = true;
+    }
+    else
+    {
+        Prev_Type = (*i).getType();
+    }
+
+    i++;
+    i++;
+
+    if(i == memory.end())
+    {
+        Next_Type = true;
+    }
+    else {
+        Next_Type = (*i).getType();
+    }
+
+
+    if(!(Prev_Type) && !(Next_Type))
+    {
+
+        i = Find_Iterator_By_Start(Prev_Start);
+        Compact_Blocks(i);
+        i = Find_Iterator_By_Start(Prev_Start);
+        Compact_Blocks(i);
+    }
+    else if(!(Prev_Type))
+    {
+        i = Find_Iterator_By_Start(Prev_Start);
+        Compact_Blocks(i);
+    }
+    else if(!(Next_Type))
+    {
+        i = Find_Iterator_By_Start(Current_Start);
+        Compact_Blocks(i);
+    }
+
+
+
 }
 
 void Memory::Print_Memory()
