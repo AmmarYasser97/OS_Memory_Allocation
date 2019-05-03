@@ -1,5 +1,6 @@
 //
-// Created by ammar on 5/2/19.
+// Created by Mohamed Hesham on 5/2/19.
+// Tested by Ammar Yasser on 5/3/19.
 //
 
 #include "memory.h"
@@ -122,8 +123,8 @@ void Memory::Print_Memory()
 {
     for (auto it = memory.begin(); it != memory.end(); ++it)
     {
-        cout << "size of" << it->getProcessName() << ":" << it->getSegmentName() << " is " << it->getSize()
-             << "\t starting from: " << it->getStart() << " till: " << it->getEnd() << "and its type: " << it->getType()
+        cout << "size of " << it->getProcessName() << ":" << it->getSegmentName() << " is " << it->getSize()
+             << "\t starting from: " << it->getStart() << " till: " << it->getEnd() << " and its type: " << it->getType()
              << endl;
     }
 }
