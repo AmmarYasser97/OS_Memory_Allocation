@@ -24,7 +24,7 @@ list<Block>::iterator Memory::Find_Iterator(int start, int end)
     list<Block>::iterator i;
     for (i = memory.begin(); i != memory.end(); i++)
     {
-        if ((*i).getStart() <= start)
+        if ((*i).getStart() <= start && (*i).getEnd() >= end)
         {
             if (!((*i).getType()) && (*i).getEnd() >= end)
             {
@@ -64,7 +64,7 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
 {
 
     list<Block>::iterator i;
-    i = Find_Iterator(Start, Start + Size);
+    i = Find_Iterator(Start, Start + Size - 1);
 
     if ((*i).getStart() == Start && (*i).getSize() == Size)
     {
@@ -75,17 +75,17 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
 
     else if ((*i).getStart() == Start)
     {
-        Block p1(PName, SName, Start, Size - 1, true);
-        Block p2("", "", Start + Size, (*i).getSize() - Size - 1, false);
+        Block p1(PName, SName, Start, Size, true);
+        Block p2("", "", Start + Size, (*i).getSize() - Size, false);
         i = memory.erase(i);
         memory.insert(i, p1);
         memory.insert(i, p2);
     }
 
-    else if ((*i).getEnd() == (Start + Size))
+    else if ((*i).getEnd() == (Start + Size - 1))
     {
-        Block p1("", "", (*i).getStart(), (*i).getSize() - Size - 1, false);
-        Block p2(PName, SName, (*i).getEnd() - Size, Size - 1, true);
+        Block p1("", "", (*i).getStart(), (*i).getSize() - Size, false);
+        Block p2(PName, SName, (*i).getEnd() - Size, Size, true);
         i = memory.erase(i);
         memory.insert(i, p1);
         memory.insert(i, p2);
@@ -93,9 +93,9 @@ void Memory::Add_Block(string PName, string SName, int Start, int Size)
 
     else
     {
-        Block p1("", "", (*i).getStart(), Start - (*i).getStart() - 1, false);
-        Block p2("PName", "SName", Start, Size - 1, true);
-        Block p3("", "", Start + Size, (*i).getEnd() - 1, false);
+        Block p1("", "", (*i).getStart(), Start - (*i).getStart(), false);
+        Block p2(PName, SName, Start, Size, true);
+        Block p3("", "", Start + Size, (*i).getSize() - (Start - (*i).getStart()) - Size, false);
         i = memory.erase(i);
         memory.insert(i, p1);
         memory.insert(i, p2);

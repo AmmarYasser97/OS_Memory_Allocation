@@ -62,7 +62,7 @@ int Block::getSize()
 
 int Block::getEnd()
 {
-    return start + size;
+    return start + size - 1;
 }
 
 bool Block::getType()
