@@ -45,10 +45,9 @@ bool Memory::Is_Empty_Boolean(int start, int end)
     list<Block>::iterator i;
     for (i = memory.begin(); i != memory.end(); i++)
     {
-        if ((*i).getStart() > start)
+        if ((*i).getStart() <= start && (*i).getEnd() >= end)
         {
-            i--;
-            if (!((*i).getType()) && (*i).getEnd() > end)
+            if (!((*i).getType()) && (*i).getEnd() >= end)
             {
                 return true;
             }
@@ -117,6 +116,15 @@ void Memory::Compact_Blocks(list<Block>::iterator i)
     i = memory.erase(i);
     i = memory.erase(i);
     memory.insert(i, p1);
+}
+
+void Memory::Remove_Block(list<Block>::iterator i)
+{
+    (*i).setProcessName("");
+    (*i).setSegmentName("");
+    (*i).setType(false);
+
+    /*Compacting Algorithm if the previous and next is empty compact twice if previous or next compact once*/
 }
 
 void Memory::Print_Memory()
