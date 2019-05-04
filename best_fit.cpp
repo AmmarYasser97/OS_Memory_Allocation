@@ -1,8 +1,8 @@
-#include "memory.h"
+#include "my_memory.h"
 
 void Memory::best_fit(Process process)
 {
-    vector<Segment> segments = process.segments;
+    QVector<Segment> segments = process.segments;
 
     for (int i = 0, n = process.num_of_segments; i < n; i++)
     {
@@ -29,7 +29,7 @@ void Memory::best_fit(Process process)
         else
         {
             Deallocate_Process(process.name);
-            cout << "ERROR can't find empty block to fit" << endl;
+            qDebug() << "ERROR can't find empty block to fit" << endl;
             return;
         }
     }
