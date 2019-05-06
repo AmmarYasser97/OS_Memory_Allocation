@@ -38,6 +38,12 @@ private slots:
 
     void on_actionQuit_triggered();
 
+    void on_actionNew_triggered();
+
+    void on_draw_clicked();
+
+    void on_draw_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

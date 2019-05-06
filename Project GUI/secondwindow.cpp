@@ -13,20 +13,36 @@ secondwindow::secondwindow(QWidget *parent) :
     QT_CHARTS_USE_NAMESPACE
 
     QStackedBarSeries *series = new QStackedBarSeries();
+    //QStringList range;
+
+    //range << "0";
 
     //![1]
 
-        std::list<Block>::iterator it;
-        for (it = m->memory.begin(); it != m->memory.end(); ++it)
-        {
-            QBarSet *memorySet = new QBarSet((*it).getProcessName());
 
-            *memorySet <<(*it).getSize();
+        std::list<Block>::reverse_iterator it;
+        for (it = m->memory.rbegin(); it != m->memory.rend(); ++it)
+        {
+
+
+            QBarSet *memorySet = new QBarSet(it->getProcessName() == ""
+                                             ? "HOLE"
+                                             : it->getProcessName() + ": " +  it->getSegmentName());
+
+            if (it->getProcessName() == "")
+            {
+                memorySet->setColor(QColor(125, 125, 125));
+            }
+            else if (it->getProcessName().contains("Old Process"))
+            {
+                memorySet->setColor(QColor(255, 0, 0));
+            }
+
+            *memorySet <<it->getSize();
 
             series->append(memorySet);
 
-//            categories << (*it).getProcessName();
-
+            //range << QString::number(it->getEnd());
         }
 
     //![1]
@@ -42,10 +58,20 @@ secondwindow::secondwindow(QWidget *parent) :
     //![3]
 
     //![4]
-        QBarCategoryAxis *axis = new QBarCategoryAxis();
-//        axis->append(categories);
+        QBarCategoryAxis *axis_x = new QBarCategoryAxis();
+        QBarCategoryAxis *axis_y = new QBarCategoryAxis();
+
+        axis_x->setReverse(true);
+
+        //axis_y->append(range);
+
+
+//      axis_x->append(categories);
         chart->createDefaultAxes();
-        chart->setAxisX(axis, series);
+        chart->setAxisX(axis_x, series);
+        //chart->setAxisY(axis_y);
+
+
     //![4]
 
     //![5]

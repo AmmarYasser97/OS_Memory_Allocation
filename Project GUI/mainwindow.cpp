@@ -6,6 +6,8 @@ QVector<int> holeSizeVector;
 QVector<int> segmentSizeVector;
 QVector<QString> processName;
 QVector<QString> segmentName;
+
+QVector<QString> current_segments;
 Memory *m=new Memory();
 Process *p_ptr;
 int memSize;
@@ -58,15 +60,26 @@ void MainWindow::on_add_hole_clicked()
 
 void MainWindow::on_add_segment_clicked()
 {
+    if (current_segments.contains(ui->SegmentName->text()))
+    {
+        QMessageBox::information(this,"Error","Segments already exists");
+        return;
+    }
+    else  if (ui->SegmentName->text() == "")
+    {
+        QMessageBox::information(this,"Error","Segment name can't be empty");
+        return;
+    }
+
+    current_segments.push_back(ui->SegmentName->text());
+
     if (p_ptr->segments.size() ==ui->noSegments->value()-1){
         ui->allocate->setEnabled(true);
         ui->add_segment->setEnabled(false);
         ui->segmentSize->setEnabled(false);
         ui->SegmentName->setEnabled(false);
-
-        //QMessageBox::information(this,"error","number of segments exceeded");
-        //return;
     }
+
     segmentName.push_back(ui->SegmentName->text());
     segmentSizeVector.push_back(ui->segmentSize->value());
 
@@ -98,15 +111,13 @@ void MainWindow::on_pushButton_clicked()
     ui->holeStart->setEnabled(true);
     ui->add_hole->setEnabled(true);
     ui->finishHoles->setEnabled(true);
+   // ui->draw_btn->setEnabled(true);
+
 }
 
 void MainWindow::on_deallocate_clicked()
 {
     m->Deallocate_Process(ui->processes->currentText());
-
-
-//    QTreeWidgetItem *i=new QTreeWidgetItem(ui->processTree);
-//    i = ui->processTree->topLevelItem(0);
 
     QTreeWidgetItem *i;
 
@@ -118,21 +129,13 @@ void MainWindow::on_deallocate_clicked()
     }
     qDebug() << ui->processTree->indexOfTopLevelItem(i);
 
-    //delete i->parent()->takeChild(i->parent()->indexOfChild(i));
     delete ui->processTree->takeTopLevelItem(ui->processTree->indexOfTopLevelItem(i));
     ui->processes->removeItem(ui->processes->currentIndex());
-//    i->setText(0,ui->processes->currentText());
-//    ui->processTree->removeItemWidget(i,0);
 
-    /*while (*i)
-    {
-        if ((*i)->text(0) == ui->processes->currentText())
-        {
-            delete ui->processTree->takeTopLevelItem(ui->processTree->indexOfTopLevelItem(*i));
-            break;
-        }
-        i++;
-    }*/
+    secondwindow drawWindow;
+    drawWindow.setModal(true);
+    drawWindow.exec();
+
 }
 
 void MainWindow::on_allocate_clicked()
@@ -161,6 +164,7 @@ void MainWindow::on_allocate_clicked()
 
 //    m->Print_Memory();
 
+
     secondwindow drawWindow;
     drawWindow.setModal(true);
     drawWindow.exec();
@@ -169,18 +173,25 @@ void MainWindow::on_allocate_clicked()
 
 void MainWindow::on_add_process_clicked()
 {
+    if (processName.count(ui->processName->text()) == 1)
+    {
+        QMessageBox::information(this,"Error","Process already exists");
+        return;
+    }
+    else if (ui->processName->text() == "")
+    {
+        QMessageBox::information(this,"Error","Process name can't be empty");
+        return;
+    }
+
+    current_segments.clear();
+
     ui->add_process->setEnabled(false);
     ui->processName->setEnabled(false);
     ui->noSegments->setEnabled(false);
     ui->add_segment->setEnabled(true);
     ui->segmentSize->setEnabled(true);
     ui->SegmentName->setEnabled(true);
-
-    if (processName.count(ui->processName->text()) == 1)
-    {
-        QMessageBox::information(this,"Error","Process already existsS");
-        return;
-    }
 
     processName.push_back(ui->processName->text());
 
@@ -232,4 +243,66 @@ void MainWindow::on_actionQuit_triggered()
         return;
     }
 
+}
+
+void MainWindow::on_actionNew_triggered()
+{
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::warning(this,"New","Are you sure you want to restart?",  QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+
+    if (reply == QMessageBox::Yes)
+    {
+
+
+      delete m;
+      ui->processTree->clear();
+      ui->processes->clear();
+      ui->holeList->clear();
+
+
+      ui->memSize->setValue(0);
+      ui->memSize->setEnabled(true);
+      ui->pushButton->setEnabled(true);
+
+      ui->holeStart->setEnabled(false);
+      ui->holeStart->setValue(0);
+
+      ui->holeSize->setEnabled(false);
+      ui->holeSize->setValue(1);
+
+      ui->add_hole->setEnabled(false);
+
+      ui->add_process->setEnabled(false);
+
+      ui->add_segment->setEnabled(false);
+
+      ui->allocate->setEnabled(false);
+
+      ui->deallocate->setEnabled(false);
+
+      ui->segmentSize->setEnabled(false);
+
+      ui->SegmentName->setEnabled(false);
+
+      ui->processName->clear();
+      ui->processName->setEnabled(false);
+
+      ui->noSegments->setEnabled(false);
+      ui->noSegments->setValue(1);
+
+
+
+    }
+    else
+    {
+        return;
+    }
+
+}
+
+void MainWindow::on_draw_btn_clicked()
+{
+    secondwindow drawWindow;
+    drawWindow.setModal(true);
+    drawWindow.exec();
 }
