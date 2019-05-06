@@ -7,21 +7,20 @@
 
 using namespace std;
 
-Memory::Memory()
-{
-
-}
-int Memory::getSize(){return size;}
-void Memory::setSize(int Size)
-{
-    Block Initial_Block("", "", 0, Size, false);
-    size =Size;
-    memory.push_back(Initial_Block);
-}
+Memory::Memory(){}
 
 Memory::Memory(int Size) : Initial_Block("", "", 0, Size, false)
 {
     size = Size;
+    memory.push_back(Initial_Block);
+}
+
+int Memory::getSize(){return size;}
+
+void Memory::setSize(int Size)
+{
+    Block Initial_Block("", "", 0, Size, false);
+    size =Size;
     memory.push_back(Initial_Block);
 }
 

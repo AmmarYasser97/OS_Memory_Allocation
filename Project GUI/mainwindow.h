@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "QVector"
+#include "QString"
+#include <QMessageBox>
+
+#include "my_memory.h"
+#include "secondwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +35,8 @@ private slots:
     void on_add_segment_clicked();
 
     void on_finishHoles_clicked();
+
+    void on_actionQuit_triggered();
 
 private:
     Ui::MainWindow *ui;

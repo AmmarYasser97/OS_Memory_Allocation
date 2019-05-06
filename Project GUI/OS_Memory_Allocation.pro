@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui\
+    charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,11 +19,14 @@ SOURCES += main.cpp\
     first_fit.cpp \
     my_block.cpp \
     my_memory.cpp \
-    worst_fit.cpp
+    worst_fit.cpp \
+    secondwindow.cpp
 
 HEADERS  += mainwindow.h \
     my_block.h \
     my_memory.h \
-    my_Process.h
+    my_Process.h \
+    secondwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    secondwindow.ui

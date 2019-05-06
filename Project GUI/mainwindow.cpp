@@ -1,9 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QVector"
-#include "QString"
-#include <QMessageBox>
-#include "my_memory.h"
 
 QVector<int> holeStartVector;
 QVector<int> holeSizeVector;
@@ -163,7 +159,12 @@ void MainWindow::on_allocate_clicked()
         break;
     }
 
-    m->Print_Memory();
+//    m->Print_Memory();
+
+    secondwindow drawWindow;
+    drawWindow.setModal(true);
+    drawWindow.exec();
+
 }
 
 void MainWindow::on_add_process_clicked()
@@ -177,7 +178,7 @@ void MainWindow::on_add_process_clicked()
 
     if (processName.count(ui->processName->text()) == 1)
     {
-        QMessageBox::information(this,"error","Process already existsS");
+        QMessageBox::information(this,"Error","Process already existsS");
         return;
     }
 
@@ -215,4 +216,20 @@ void MainWindow::on_finishHoles_clicked()
     {
         ui->processes->addItem(s);
     }
+}
+
+void MainWindow::on_actionQuit_triggered()
+{
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::warning(this,"Quit","Are you sure you want to quit?",  QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+
+    if (reply == QMessageBox::Yes)
+    {
+      QApplication::quit();
+    }
+    else
+    {
+        return;
+    }
+
 }

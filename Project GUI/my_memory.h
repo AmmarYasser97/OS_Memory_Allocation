@@ -3,6 +3,7 @@
 
 #include "my_block.h"
 #include "my_Process.h"
+#include "secondwindow.h"
 
 using namespace std;
 
@@ -12,11 +13,15 @@ class Memory
     list<Block> memory;
     Block Initial_Block;
     int size;
+    friend class secondwindow;
 
   public:
     explicit Memory(int Size);
+
     explicit Memory();
+
     int getSize();
+
     void setSize(int Size);
 
     list<Block>::iterator Find_Iterator(int start, int end);
