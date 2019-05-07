@@ -1,6 +1,6 @@
 #include "my_memory.h"
 
-void Memory::worst_fit(Process process)
+bool Memory::worst_fit(Process process)
 {
     QVector<Segment> segments = process.segments;
 
@@ -29,8 +29,8 @@ void Memory::worst_fit(Process process)
         else
         {
             Deallocate_Process(process.name);
-            qDebug() << "ERROR can't find empty block to fit" << endl;
-            return;
+            return false;
         }
     }
+    return true;
 }

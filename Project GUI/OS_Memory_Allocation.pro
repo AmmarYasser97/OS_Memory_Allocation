@@ -20,13 +20,15 @@ SOURCES += main.cpp\
     my_block.cpp \
     my_memory.cpp \
     worst_fit.cpp \
-    secondwindow.cpp
+    secondwindow.cpp \
+    callout.cpp
 
 HEADERS  += mainwindow.h \
     my_block.h \
     my_memory.h \
     my_Process.h \
-    secondwindow.h
+    secondwindow.h \
+    callout.h
 
 FORMS    += mainwindow.ui \
     secondwindow.ui

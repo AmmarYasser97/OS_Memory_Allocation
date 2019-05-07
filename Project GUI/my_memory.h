@@ -20,6 +20,8 @@ class Memory
 
     explicit Memory();
 
+    ~Memory();
+
     int getSize();
 
     void setSize(int Size);
@@ -42,11 +44,15 @@ class Memory
 
     void Deallocate_Process(QString process_name);
 
-    void best_fit(Process process);
+    bool best_fit(Process process);
 
-    void first_fit(Process process);
+    bool first_fit(Process process);
 
-    void worst_fit(Process process);
+    bool worst_fit(Process process);
+
+    void newMem();
+
+    void Compact_Memory();
 };
 
 #endif // MEMORY_H

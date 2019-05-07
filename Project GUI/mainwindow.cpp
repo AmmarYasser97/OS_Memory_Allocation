@@ -94,7 +94,6 @@ void MainWindow::on_add_segment_clicked()
     s.name = ui->SegmentName->text();
     s.size = ui->segmentSize->value();
 
-    qDebug() << ui->segmentSize->value();
     p_ptr->segments.push_back(s);
 
 }
@@ -103,15 +102,13 @@ void MainWindow::on_pushButton_clicked()
 {
     memSize=ui->memSize->value();
     m->setSize(memSize);
-    qDebug()<<QString::number(m->getSize());
-    m->Print_Memory();
     ui->memSize->setEnabled(false);
     ui->pushButton->setEnabled(false);
     ui->holeSize->setEnabled(true);
     ui->holeStart->setEnabled(true);
     ui->add_hole->setEnabled(true);
     ui->finishHoles->setEnabled(true);
-   // ui->draw_btn->setEnabled(true);
+    ui->drawButton->setEnabled(true);
 
 }
 
@@ -121,54 +118,61 @@ void MainWindow::on_deallocate_clicked()
 
     QTreeWidgetItem *i;
 
-    if(ui->processTree->findItems(ui->processes->currentText(), Qt::MatchExactly, 0).isEmpty()){
-        QMessageBox::information(this,"error","error");
-    }
-    else{
+    ui->allocate->setEnabled(false);
+
+    if(ui->processTree->findItems(ui->processes->currentText(), Qt::MatchExactly, 0).size()!=0){
         i=ui->processTree->findItems(ui->processes->currentText(), Qt::MatchExactly, 0)[0];
+        processName.remove(processName.indexOf(ui->processes->currentText()));
+        delete ui->processTree->takeTopLevelItem(ui->processTree->indexOfTopLevelItem(i));
     }
-    qDebug() << ui->processTree->indexOfTopLevelItem(i);
+    for(int i=0;i<processName.size();i++) {
+        qDebug()<<processName[i];
+    }
 
-    delete ui->processTree->takeTopLevelItem(ui->processTree->indexOfTopLevelItem(i));
     ui->processes->removeItem(ui->processes->currentIndex());
-
     secondwindow drawWindow;
     drawWindow.setModal(true);
     drawWindow.exec();
-
 }
 
 void MainWindow::on_allocate_clicked()
 {
+    bool fit = false;
     ui->processes->addItem(ui->processName->text());
+    ui->allocate->setEnabled(false);
+
 
     ui->add_process->setEnabled(true);
     ui->processName->setEnabled(true);
     ui->noSegments->setEnabled(true);
 
-    m->Print_Memory();
-    qDebug() << "-------------";
     switch (ui->processes_2->currentIndex()) {
     case 0:
-       m->first_fit(*p_ptr);
+       fit = m->first_fit(*p_ptr);
        break;
     case 1:
-        m->best_fit(*p_ptr);
+        fit = m->best_fit(*p_ptr);
         break;
     case 2:
-        m->worst_fit(*p_ptr);
+        fit = m->worst_fit(*p_ptr);
         break;
     default:
         break;
     }
 
-//    m->Print_Memory();
+    if (!fit)
+    {
+        QMessageBox::information(this, "Error", "Couldn't allocate");
+        ui->processes->removeItem(ui->processes->currentIndex());
+    }
 
+    else
+    {
+        secondwindow drawWindow;
+        drawWindow.setModal(true);
+        drawWindow.exec();
 
-    secondwindow drawWindow;
-    drawWindow.setModal(true);
-    drawWindow.exec();
-
+    }
 }
 
 void MainWindow::on_add_process_clicked()
@@ -220,6 +224,7 @@ void MainWindow::on_finishHoles_clicked()
     ui->noSegments->setEnabled(true);
     ui->add_process->setEnabled(true);
     ui->deallocate->setEnabled(true);
+    ui->CompactMemory->setEnabled(true);
 
     QVector<QString> old_Processes = m->Flip_Blocks();
 
@@ -254,10 +259,11 @@ void MainWindow::on_actionNew_triggered()
     {
 
 
-      delete m;
-      ui->processTree->clear();
-      ui->processes->clear();
-      ui->holeList->clear();
+        m->newMem();
+
+        ui->processTree->clear();
+        ui->processes->clear();
+        ui->holeList->clear();
 
 
       ui->memSize->setValue(0);
@@ -300,8 +306,17 @@ void MainWindow::on_actionNew_triggered()
 
 }
 
-void MainWindow::on_draw_btn_clicked()
+
+void MainWindow::on_drawButton_clicked()
 {
+    secondwindow drawWindow;
+    drawWindow.setModal(true);
+    drawWindow.exec();
+}
+
+void MainWindow::on_CompactMemory_clicked()
+{
+    m->Compact_Memory();
     secondwindow drawWindow;
     drawWindow.setModal(true);
     drawWindow.exec();

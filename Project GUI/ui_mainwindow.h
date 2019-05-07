@@ -60,6 +60,7 @@ public:
     QSpinBox *segmentSize;
     QPushButton *add_segment;
     QTreeWidget *processTree;
+    QPushButton *drawButton;
     QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
@@ -85,6 +86,7 @@ public:
     QHBoxLayout *horizontalLayout_11;
     QComboBox *processes_2;
     QPushButton *allocate;
+    QPushButton *CompactMemory;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -94,7 +96,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(775, 477);
+        MainWindow->resize(770, 451);
         actionNew = new QAction(MainWindow);
         actionNew->setObjectName(QStringLiteral("actionNew"));
         actionQuit = new QAction(MainWindow);
@@ -103,7 +105,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         layoutWidget = new QWidget(centralWidget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(288, 26, 471, 351));
+        layoutWidget->setGeometry(QRect(280, 30, 471, 351));
         verticalLayout_3 = new QVBoxLayout(layoutWidget);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -227,6 +229,12 @@ public:
         processTree->setObjectName(QStringLiteral("processTree"));
 
         verticalLayout_3->addWidget(processTree);
+
+        drawButton = new QPushButton(layoutWidget);
+        drawButton->setObjectName(QStringLiteral("drawButton"));
+        drawButton->setEnabled(false);
+
+        verticalLayout_3->addWidget(drawButton);
 
         layoutWidget1 = new QWidget(centralWidget);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
@@ -370,10 +378,16 @@ public:
 
         verticalLayout_7->addLayout(horizontalLayout_11);
 
+        CompactMemory = new QPushButton(layoutWidget2);
+        CompactMemory->setObjectName(QStringLiteral("CompactMemory"));
+        CompactMemory->setEnabled(false);
+
+        verticalLayout_7->addWidget(CompactMemory);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 775, 21));
+        menuBar->setGeometry(QRect(0, 0, 770, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         MainWindow->setMenuBar(menuBar);
@@ -407,6 +421,7 @@ public:
         label_8->setText(QApplication::translate("MainWindow", "Segment Name", 0));
         label_5->setText(QApplication::translate("MainWindow", "Size", 0));
         add_segment->setText(QApplication::translate("MainWindow", "Add Segment", 0));
+        drawButton->setText(QApplication::translate("MainWindow", "Draw", 0));
         label->setText(QApplication::translate("MainWindow", "Memory Size", 0));
         pushButton->setText(QApplication::translate("MainWindow", "OK", 0));
         label_3->setText(QApplication::translate("MainWindow", "Hole Start", 0));
@@ -421,6 +436,7 @@ public:
          << QApplication::translate("MainWindow", "Worst Fit", 0)
         );
         allocate->setText(QApplication::translate("MainWindow", "Allocate", 0));
+        CompactMemory->setText(QApplication::translate("MainWindow", "Compact Memory", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi
 

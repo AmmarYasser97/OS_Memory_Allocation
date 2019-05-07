@@ -40,9 +40,9 @@ private slots:
 
     void on_actionNew_triggered();
 
-    void on_draw_clicked();
+    void on_drawButton_clicked();
 
-    void on_draw_btn_clicked();
+    void on_CompactMemory_clicked();
 
 private:
     Ui::MainWindow *ui;

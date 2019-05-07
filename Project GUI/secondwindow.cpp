@@ -1,5 +1,6 @@
 #include "secondwindow.h"
 #include "ui_secondwindow.h"
+#include "callout.h"
 
 secondwindow::secondwindow(QWidget *parent) :
     QDialog(parent),
@@ -13,11 +14,11 @@ secondwindow::secondwindow(QWidget *parent) :
     QT_CHARTS_USE_NAMESPACE
 
     QStackedBarSeries *series = new QStackedBarSeries();
-    //QStringList range;
-
-    //range << "0";
+    QStringList range;
 
     //![1]
+    QValueAxis *axis_y = new QValueAxis();
+    axis_y->setTickCount(5);
 
 
         std::list<Block>::reverse_iterator it;
@@ -42,55 +43,68 @@ secondwindow::secondwindow(QWidget *parent) :
 
             series->append(memorySet);
 
-            //range << QString::number(it->getEnd());
+            //range << QString::number(it->getEnd()) + 1;
+            //axis_y->append(QString::number(it->getEnd()) + 1, it->getEnd() + 1);
         }
 
-    //![1]
 
-    //![2]
-    //![2]
 
-    //![3]
-        QChart *chart = new QChart();
-        chart->addSeries(series);
-        chart->setTitle("Memory visualization");
-        chart->setAnimationOptions(QChart::SeriesAnimations);
-    //![3]
+        m_chart = new QChart();
+        m_chart->addSeries(series);
+        m_chart->setTitle("Memory visualization");
+        m_chart->setAnimationOptions(QChart::SeriesAnimations);
 
-    //![4]
         QBarCategoryAxis *axis_x = new QBarCategoryAxis();
-        QBarCategoryAxis *axis_y = new QBarCategoryAxis();
 
         axis_x->setReverse(true);
 
-        //axis_y->append(range);
 
+        axis_y->setReverse(true);
 
-//      axis_x->append(categories);
-        chart->createDefaultAxes();
-        chart->setAxisX(axis_x, series);
-        //chart->setAxisY(axis_y);
+        m_chart->createDefaultAxes();
+        m_chart->setAxisX(axis_x, series);
+        m_chart->setAxisY(axis_y,series);
 
+        m_chart->legend()->setVisible(true);
+        m_chart->legend()->setAlignment(Qt::AlignBottom);
 
-    //![4]
-
-    //![5]
-        chart->legend()->setVisible(true);
-        chart->legend()->setAlignment(Qt::AlignBottom);
-    //![5]
-
-    //![6]
-        QChartView *chartView = new QChartView(chart, this);
+        QChartView *chartView = new QChartView(m_chart, this);
         chartView->setRenderHint(QPainter::Antialiasing);
-    //![6]
 
-    //![7]
+        //chart->hoverEnterEvent();
+
         ui->verticalLayout->addWidget(chartView);
-//        chartView->show();
-    //![7]
 
 }
 
+//void secondwindow::mouseMoveEvent(QMouseEvent *event)
+//{
+//    m_coordX->setText(QString("X: %1").arg(m_chart->mapToValue(event->pos()).x()));
+//    m_coordY->setText(QString("Y: %1").arg(m_chart->mapToValue(event->pos()).y()));
+//    QGraphicsView::mouseMoveEvent(event);
+//}
+
+//void secondwindow::keepCallout()
+//{
+//    m_callouts.append(m_tooltip);
+//    m_tooltip = new Callout(m_chart);
+//}
+
+//void secondwindow::tooltip(QPointF point, bool state)
+//{
+//    if (m_tooltip == 0)
+//        m_tooltip = new Callout(m_chart);
+
+//    if (state) {
+//        m_tooltip->setText(QString("X: %1 \nY: %2 ").arg(point.x()).arg(point.y()));
+//        m_tooltip->setAnchor(point);
+//        m_tooltip->setZValue(11);
+//        m_tooltip->updateGeometry();
+//        m_tooltip->show();
+//    } else {
+//        m_tooltip->hide();
+//    }
+//}
 secondwindow::~secondwindow()
 {
     delete ui;

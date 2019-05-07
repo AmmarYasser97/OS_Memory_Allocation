@@ -17,6 +17,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
@@ -27,6 +28,8 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_2;
+    QSpacerItem *verticalSpacer;
     QPushButton *pushButton;
 
     void setupUi(QDialog *secondwindow)
@@ -46,10 +49,19 @@ public:
 
         horizontalLayout->addLayout(verticalLayout);
 
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_2->addItem(verticalSpacer);
+
         pushButton = new QPushButton(secondwindow);
         pushButton->setObjectName(QStringLiteral("pushButton"));
 
-        horizontalLayout->addWidget(pushButton);
+        verticalLayout_2->addWidget(pushButton);
+
+
+        horizontalLayout->addLayout(verticalLayout_2);
 
 
         horizontalLayout_3->addLayout(horizontalLayout);

@@ -241,3 +241,54 @@ void Memory::Deallocate_Process(QString process_name)
         }
     }
 }
+
+Memory::~Memory()
+{
+
+}
+
+void Memory::newMem()
+{
+    memory.clear();
+}
+
+void Memory:: Compact_Memory()
+{
+    Block *b=new Block();
+    list<Block> TEMP;
+    list<Block>::iterator i;
+    int memSize;
+    int start = 0;
+
+    memSize = getSize();
+
+    for(i = memory.begin(); i!=memory.end();i++ )
+    {
+        if((*i).getType() == true)
+        {
+            b->setProcessName((*i).getProcessName());
+            b->setSegmentName((*i).getSegmentName());
+            b->setSize((*i).getSize());
+            b->setType(true);
+            b->setStart(start);
+
+            TEMP.push_back(*b);
+
+            start += (*i).getSize();
+        }
+
+    }
+
+    b->setProcessName("");
+    b->setSegmentName("");
+    b->setSize(memSize - start);
+    b->setType(false);
+    b->setStart(start);
+
+    TEMP.push_back(*b);
+
+    memory = TEMP;
+
+
+
+}
